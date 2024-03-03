@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
     return (
@@ -10,7 +11,7 @@ const ErrorPage = () => {
 			</h2>
 			<p className="text-2xl font-semibold md:text-3xl">Sorry, we could't find this page.</p>
 			<p className="mt-4 mb-8 text-gray-600">But dont worry, you can find plenty of other things on our homepage.</p>
-			<a rel="noopener noreferrer" href="#" className="px-8 py-3 font-semibold rounded bg-blue-600 text-gray-50">Back to homepage</a>
+			<Link rel="noopener noreferrer" href="/" className="px-8 py-3 font-semibold rounded bg-blue-600 text-gray-50">Back to homepage</Link>
 		</div>
 	</div>
 </section>
