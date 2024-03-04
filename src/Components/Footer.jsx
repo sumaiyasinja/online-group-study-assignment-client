@@ -17,7 +17,7 @@ const Footer = () => {
 	</li>
     </>
     return (
-        <div>
+        <div className="">
             <footer className="py-6  bg-[#27374D] text-[#DDE6ED]">
 	<div className="container px-6 mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
 		<div className="grid grid-cols-12">
@@ -28,7 +28,7 @@ const Footer = () => {
 						
 					</div>
 				</a>
-					<span className="self-center text-base mt-2">An online group study platform.</span>
+					<p className="self-center text-base mt-3">An online group study platform.</p>
 			</div>
 			<div className="col-span-6 text-center md:text-left md:col-span-3">
 				<p className="pb-1 text-lg font-medium">Category</p>

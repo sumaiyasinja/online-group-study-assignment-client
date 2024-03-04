@@ -26,6 +26,16 @@ const Navbar = () => {
           Assignments
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/create_assignments"
+          aria-label="Create Assignments"
+          title="Create Assignments"
+          className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+        >
+          Create Assignments
+        </NavLink>
+      </li>
     </>
   );
   return (
