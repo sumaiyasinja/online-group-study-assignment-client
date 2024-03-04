@@ -2,7 +2,8 @@
 
 import React, { createContext } from 'react';
 // context API
-export AuthContext = createContext(null);
+export const AuthContext = createContext(null);
+
 const AuthProvider = ({children}) => {
     const authinfo ={
 
