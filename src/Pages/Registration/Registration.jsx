@@ -1,9 +1,11 @@
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import "../../assets/css/loginregi.css";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../../Firebase/firebase.config";
 
 const Registration = () => {
-  const { LogInWithGoogle } = useAuth();
+  const { LogInWithGoogle, registerWIthEmail } = useAuth();
 
   const handleGoogleLogin = () => {
     LogInWithGoogle()
@@ -13,6 +15,40 @@ const Registration = () => {
       })
       .catch((error) => toast.error(error));
   };
+
+  const handleRegistration = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const username = form.username.value;
+    const email = form.email.value;
+    const photoUrl = form.photoUrl.value;
+    const password = form.password.value;
+    const userInfo = {
+      username,
+      email,
+      photoUrl,
+      password,
+    };
+    console.log(userInfo);
+
+    registerWIthEmail(email, password)
+      .then(() => {
+        toast.success("Registration Success");
+        updateProfile(auth.currentUser, {
+          photoURL: photoUrl,
+        })
+          .then(() => {
+            console.log("Profile photo updated!");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
+  };
+
   return (
     <div>
       <Toaster />
@@ -20,7 +56,7 @@ const Registration = () => {
       <div className=" flex justify-center items-center py-5 px-5">
         <div className="form-container">
           <p className="title">Register</p>
-          <form className="form">
+          <form className="form" onSubmit={handleRegistration}>
             <div className="input-group ">
               <label htmlFor="username">Username</label>
               <input
@@ -62,7 +98,12 @@ const Registration = () => {
                 required
               />
             </div>
-            <button className="sign">Sign Up</button>
+            <input
+              type="submit"
+              name="signUp"
+              value="Sign Up"
+              className="sign"
+            />
           </form>
           <div className="social-message">
             <div className="line"></div>
