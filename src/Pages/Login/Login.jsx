@@ -1,24 +1,43 @@
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import "../../assets/css/loginregi.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { LogInWithGoogle } = useAuth();
+  const { LogInWithGoogle,loginWithEmailAndPasword  } = useAuth();
   const handleGoogleLogin = () => {
     LogInWithGoogle()
       .then((result) => {toast.success("Login Success") ; console.log(result);})
       .catch((error) => toast.error(error));
   };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    loginWithEmailAndPasword (email, password)
+      .then(() => {
+        toast.success("Succefully logged in");
+
+        navigate(location?.state ? location?.state : "/");
+      })
+      .catch((e) => toast.error(e.message));
+  };
+
   return (
-    <div>
+    <div className=" w-screen ">
       <Toaster />
       <div className=" flex justify-center items-center py-5 px-5">
         <div className="form-container">
           <p className="title">Login</p>
-          <form className="form">
+          <form className="form" onSubmit={handleLogin}>
             <div className="input-group">
-              <label htmlFor="username">Username</label>
-              <input type="text" name="username" id="username" placeholder="" />
+              <label htmlFor="email">email</label>
+              <input type="email" name="email" id="email" placeholder="email@example.com" />
             </div>
             <div className="input-group">
               <label htmlFor="password">Password</label>
@@ -26,15 +45,15 @@ const Login = () => {
                 type="password"
                 name="password"
                 id="password"
-                placeholder=""
+                placeholder="your password"
               />
-              <div className="forgot">
+              {/* <div className="forgot">
                 <a rel="noopener noreferrer" href="#">
                   Forgot Password ?
                 </a>
-              </div>
+              </div> */}
             </div>
-            <button className="sign">Sign in</button>
+            <input type="submit" value="Sign In" className="sign !mt-5"/>
           </form>
           <div className="social-message">
             <div className="line"></div>

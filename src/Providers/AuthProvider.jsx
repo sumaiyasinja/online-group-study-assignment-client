@@ -1,10 +1,10 @@
-// <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-600"></div>
 
 import { createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
@@ -27,6 +27,10 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+  const loginWithEmailAndPasword = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
   const logOut = () => {
     setLoading(true);
 
@@ -37,8 +41,8 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       console.log(currentUser);
       setLoading(false);
-      const userEmail = currentUser?.email || user?.email;
-      const userInfo = { email: userEmail };
+    //   const userEmail = currentUser?.email || user?.email;
+    //   const userInfo = { email: userEmail };
 
       //   if (currentUser) {
       //     axiosPublic.post("/jwt", userInfo).then((res) => {
@@ -57,9 +61,12 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const authinfo = {
+    user,
     LogInWithGoogle,
     registerWIthEmail,
     logOut,
+    loading,
+    loginWithEmailAndPasword
   };
   return (
     <AuthContext.Provider value={authinfo}>{children}</AuthContext.Provider>

@@ -1,9 +1,15 @@
 import { useState } from "react";
 import logo from "../assets/img/logo (4).png";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logOut } = useAuth();
+  console.log("user from navbar", user?.photoURL);
+  const handleLogOut = () => {
+    logOut();
+  };
   const NavLinks = (
     <>
       <li>
@@ -26,18 +32,21 @@ const Navbar = () => {
           Assignments
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/create_assignments"
-          aria-label="Create Assignments"
-          title="Create Assignments"
-          className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-        >
-          Create Assignments
-        </NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink
+            to="/create-assignment"
+            aria-label="Create Assignment"
+            title="Create Assignment"
+            className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+          >
+            Create Assignments
+          </NavLink>
+        </li>
+      )}
     </>
   );
+
   return (
     <div>
       <div className="bg-[#27374D] text-[#DDE6ED] sticky top-0 z-50">
@@ -55,26 +64,47 @@ const Navbar = () => {
               {NavLinks}
             </ul>
             <ul className="flex items-center hidden space-x-3 lg:flex">
-              <li>
-                          <Link
-                            to="/login"
-                            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                            aria-label="Sign in"
-                            title="Sign in"
-                          >
-                            Sign in
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/register"
-                            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                            aria-label="Sign up"
-                            title="Sign up"
-                          >
-                            Sign Up
-                          </Link>
-                        </li>
+            {user ? (
+                          <>
+                            <li>
+                              <img
+                                className="rounded-full inline-flex items-center justify-center w-full h-14 p-1 font-medium tracking-wide text-white transition duration-200  shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                alt="user photo"
+                                src={user?.photoURL}
+                              />
+                              
+                            </li>
+                            <li><button
+                                className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                onClick={handleLogOut}
+                              >
+                                Sign out
+                              </button></li>
+                          </>
+                        ) : (
+                          <>
+                            <li>
+                              <Link
+                                to="/login"
+                                className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                aria-label="Sign in"
+                                title="Sign in"
+                              >
+                                Sign in
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                to="/register"
+                                className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                aria-label="Sign up"
+                                title="Sign up"
+                              >
+                                Sign Up
+                              </Link>
+                            </li>
+                          </>
+                        )}
             </ul>
             <div className="lg:hidden">
               <button
@@ -151,26 +181,46 @@ const Navbar = () => {
                     <nav>
                       <ul className="space-y-4">
                         {NavLinks}
-                        <li>
-                          <Link
-                            to="/login"
-                            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                            aria-label="Sign in"
-                            title="Sign in"
-                          >
-                            Sign in
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/register"
-                            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                            aria-label="Sign up"
-                            title="Sign up"
-                          >
-                            Sign Up
-                          </Link>
-                        </li>
+                        {user ? (
+                          <>
+                            <li>
+                              <img
+                                className="rounded-full inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                alt="user photo"
+                                src={user?.photoURL}
+                              />
+                              <button
+                                className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                onClick={handleLogOut}
+                              >
+                                LogOut
+                              </button>
+                            </li>
+                          </>
+                        ) : (
+                          <>
+                            <li>
+                              <Link
+                                to="/login"
+                                className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                aria-label="Sign in"
+                                title="Sign in"
+                              >
+                                Sign in
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                to="/register"
+                                className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                aria-label="Sign up"
+                                title="Sign up"
+                              >
+                                Sign Up
+                              </Link>
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </nav>
                   </div>

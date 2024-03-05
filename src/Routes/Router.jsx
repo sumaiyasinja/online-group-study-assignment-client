@@ -5,6 +5,7 @@
   import Login from './../Pages/Login/Login';
   import Registration from './../Pages/Registration/Registration';
   import ErrorPage from './../Pages/Error/ErrorPage';
+import AssignAssignment from '../Pages/AssignAssignment/AssignAssignment';
   
   
   export const router = createBrowserRouter([
@@ -24,6 +25,10 @@
           {
             path: "/register",
             element: <Registration/>,
+          },
+          {
+            path: "/create-assignment",
+            element: <AssignAssignment/>,
           },
         ],
       },
