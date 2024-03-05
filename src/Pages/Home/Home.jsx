@@ -1,7 +1,9 @@
 import Banner from "../../Components/Banner";
-import CallInAction from "../../Components/CallInAction";
+import Feedback from "../../Components/Feedback";
 import Features from "../../Components/Features";
 import Team from "../../Components/Team";
+import Testimonial from './../../Components/Testimonial';
+import FAQAccrodion from "../../Components/FAQAccrodion";
 
 
 const Home = () => {
@@ -10,7 +12,10 @@ const Home = () => {
             <Banner></Banner>
             <Features></Features>
             <Team></Team>
-            <CallInAction></CallInAction>
+            <Testimonial/>
+            <Feedback></Feedback>
+            <FAQAccrodion/>
+
         </div>
     );
 };

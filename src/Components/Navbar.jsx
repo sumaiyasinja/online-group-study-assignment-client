@@ -6,9 +6,10 @@ import useAuth from "../Hooks/useAuth";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logOut } = useAuth();
-  console.log("user from navbar", user?.photoURL);
   const handleLogOut = () => {
-    logOut();
+    logOut()
+    .then (() => console.log("Logged Out"))
+    .catch((e)=> console.error("Error propmt logging out", e))
   };
   const NavLinks = (
     <>

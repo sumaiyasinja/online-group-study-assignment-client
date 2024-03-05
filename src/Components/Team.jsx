@@ -11,12 +11,10 @@ const Team = () => {
 }, []);
 
     return (
-        <div>
+        <div className="container mx-auto">
             {/* <p className="text-4xl text-lavender text-center py-10">Our Top Student</p> */}
             <SectionTitle title="Our Top Student" />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-               
-
                 <div 
                    data-aos="fade-up" 
                    data-aos-duration="800"

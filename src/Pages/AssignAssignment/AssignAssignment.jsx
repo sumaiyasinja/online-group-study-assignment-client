@@ -5,6 +5,7 @@ import { useState } from "react";
 import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import SectionTitle from './../../Components/SectionTitle';
 
 
 
@@ -100,10 +101,10 @@ const AssignAssignment = () => {
       <Toaster />
       <div className="py-8 px-4 mx-auto max-w-2xl lg:py-6">
         <h2 className="mb-4 text-4xl text-slate-800 font-bold  dark:text-white py-2">
-          Add a new Assignment
         </h2>
+        <SectionTitle title="Add a new Assignment"/>
 
-        <form onSubmit={handleAddAssignment}>
+        <form onSubmit={handleAddAssignment} className="pt-5">
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div className="sm:col-span-2">
               <label
